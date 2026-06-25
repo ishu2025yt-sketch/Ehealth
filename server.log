@@ -1,0 +1,4 @@
+◇ injected env (4) from .env // tip: ⌁ auth for agents [www.vestauth.com]
+⚠️ Firebase not configured - using demo mode
+   Get real config from Firebase Console > Project Settings > Service Accounts
+🚀 Server running on port 3000

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title><%= typeof title !== 'undefined' ? title : 'E-Health Record System' %></title>
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+  <style>
+    /* ---------- Global Reset ---------- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #00b4d8, #0077b6);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ---------- Navbar ---------- */
+    nav {
+      width: 100%;
+      background: rgba(255,255,255,0.95);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      padding: 12px 30px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 600;
+      color: #0077b6;
+      font-size: 1.2rem;
+      text-decoration: none;
+    }
+
+    .nav-brand i {
+      color: #0077b6;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #023e8a;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: #0096c7;
+    }
+
+    /* ---------- Responsive Navbar ---------- */
+    @media (max-width: 768px) {
+      nav {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .nav-links {
+        margin-top: 8px;
+        width: 100%;
+        justify-content: flex-start;
+        gap: 15px;
+      }
+    }
+
+    /* ---------- Main Content Area ---------- */
+    main {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 30px 10px;
+    }
+
+    /* ---------- Footer ---------- */
+    footer {
+      background: rgba(255,255,255,0.95);
+      text-align: center;
+      padding: 15px 0;
+      color: #023e8a;
+      font-size: 14px;
+      box-shadow: 0 -2px 8px rgba(0,0,0,0.05);
+    }
+
+    footer span {
+      font-weight: 600;
+      color: #0077b6;
+    }
+
+    /* ---------- Scrollbar for Desktop ---------- */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #0077b6;
+      border-radius: 5px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #023e8a;
+    }
+
+    /* ---------- Responsive Fix ---------- */
+    @media (max-width: 480px) {
+      .nav-brand {
+        font-size: 1rem;
+      }
+      .nav-links a {
+        font-size: 14px;
+      }
+      footer {
+        font-size: 12px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- ---------- Navbar ---------- -->
+  <nav>
+    <a href="/" class="nav-brand">
+      <i class="fas fa-notes-medical"></i> E-Health
+    </a>
+    <div class="nav-links">
+      <a href="/login"><i class="fas fa-sign-in-alt"></i> Login</a>
+      <a href="/register"><i class="fas fa-user-plus"></i> Register</a>
+    </div>
+  </nav>
+
+  <!-- ---------- Dynamic Body ---------- -->
+  <main>
+    <%- body %>
+  </main>
+
+  <!-- ---------- Footer ---------- -->
+
+<footer style="
+  background: linear-gradient(90deg, #007bff, #00c6ff);
+  color: #ffffff;
+  text-align: center;
+  padding: 14px 0;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+">
+  © <%= new Date().getFullYear() %> 
+  <span style="font-weight:600; color:#ffeb3b;">E-Health Record System</span> 
+  | Designed with 
+  <span style="color:#ff4b5c; font-size:16px;">❤️</span> 
+  by <span style="font-weight:600; color:#ffe082;">༆ᵀᵉᵃᵐ ᭄ÑũŘɪѕʜᴜ ☣ Sᴜʙʀᴀᴛᴀ ☆ Ꭺɴɪᴍᴇꜱʜ࿐</span>
+</footer>
+
+
+</body>
+</html>

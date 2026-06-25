@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel | E-Health Record</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f4f7fc;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background: #0066cc;
+      color: white;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-radius: 0 0 10px 10px;
+    }
+
+    header h1 {
+      font-size: 20px;
+      margin: 0;
+    }
+
+    .btn {
+      padding: 8px 15px;
+      border-radius: 6px;
+      text-decoration: none;
+      color: white;
+      background: #004fa3;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background: #003c82;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 20px auto;
+      padding: 15px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      color: #0066cc;
+      border-bottom: 2px solid #0066cc;
+      padding-bottom: 6px;
+      margin-top: 30px;
+      margin-bottom: 20px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 30px;
+      table-layout: fixed; /* ✅ Prevents overflow and keeps alignment */
+      word-wrap: break-word;
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 10px 12px;
+      text-align: left;
+      font-size: 15px;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+      white-space: normal; /* ✅ Ensures multi-line wrapping */
+    }
+
+    th {
+      background: #0066cc;
+      color: white;
+    }
+
+    tr:nth-child(even) {
+      background: #f2f4f8;
+    }
+
+    tr:hover {
+      background: #e8f0ff;
+      transition: 0.3s;
+    }
+
+    @media (max-width: 700px) {
+      .container { padding: 10px; }
+      table, thead, tbody, th, td, tr {
+        display: block;
+      }
+      th { display: none; }
+      td {
+        border: none;
+        padding: 10px;
+        position: relative;
+        padding-left: 50%;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+      }
+      td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 10px;
+        font-weight: bold;
+        color: #0066cc;
+        white-space: nowrap;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- ✅ Admin Dashboard Header inside container -->
+    <header>
+      <h1><i class="fas fa-user-shield"></i> Admin Dashboard</h1>
+      <a href="/logout" class="btn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+    </header>
+
+    <h2><i class="fas fa-users"></i> User Management</h2>
+    <table>
+      <thead>
+        <tr><th>Name</th><th>Email</th><th>Role</th><th>Created</th></tr>
+      </thead>
+      <tbody>
+        <% users.forEach(u => { %>
+          <tr>
+            <td data-label="Name"><%= u.name %></td>
+            <td data-label="Email"><%= u.email %></td>
+            <td data-label="Role"><%= u.role %></td>
+            <td data-label="Created"><%= u.createdAt ? new Date(u.createdAt).toLocaleString() : 'N/A' %></td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+
+    <h2><i class="fas fa-file-medical"></i> Medical Records</h2>
+    <table>
+      <thead>
+        <tr><th>Patient</th><th>Doctor</th><th>Owner</th><th>Date</th><th>Actions</th></tr>
+      </thead>
+      <tbody>
+        <% records.forEach(r => { %>
+          <tr>
+            <td data-label="Patient"><%= r.patientName %></td>
+            <td data-label="Doctor"><%= r.doctor %></td>
+            <td data-label="Owner"><%= r.ownerName %></td>
+            <td data-label="Date"><%= r.createdAt ? new Date(r.createdAt).toLocaleString() : 'N/A' %></td>
+            <td data-label="Actions">
+              <a href="/records/<%= r.id %>/pdf" target="_blank" class="btn"><i class="fas fa-file-pdf"></i> PDF</a>
+            </td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+
+</body>
+</html>

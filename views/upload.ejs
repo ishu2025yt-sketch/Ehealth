@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>E-Health | Upload Record</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f8faff;
+      margin: 0;
+      padding-top: 85px; /* ✅ space for fixed topbar */
+      color: #111;
+    }
+
+    /* 🔹 Fixed Top Buttons */
+    .topbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: linear-gradient(90deg, #0073e6, #005bb5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      padding: 14px 10px;
+      z-index: 1000;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .topbar a {
+      background: #ffffff;
+      color: #005bb5;
+      text-decoration: none;
+      padding: 10px 18px;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 15px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: 0.3s;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .topbar a:hover {
+      background: #e6f0ff;
+      transform: translateY(-2px);
+    }
+
+    .topbar i {
+      font-size: 16px;
+    }
+
+    @media (max-width: 600px) {
+      .topbar {
+        flex-direction: row;
+        justify-content: space-around;
+        gap: 6px;
+        padding: 12px 6px;
+      }
+      .topbar a {
+        flex: 1;
+        justify-content: center;
+        padding: 10px;
+        font-size: 14px;
+      }
+      .topbar span {
+        display: none; /* ✅ hides text on small screens */
+      }
+      .topbar i {
+        font-size: 18px;
+      }
+    }
+
+    /* 🔹 Form Card */
+    .card {
+      max-width: 420px;
+      margin: 40px auto;
+      background: #fff;
+      border-radius: 16px;
+      padding: 25px 30px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    }
+
+    .card h2 {
+      text-align: center;
+      color: #0073e6;
+      margin-bottom: 20px;
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+    label {
+      font-weight: 600;
+      color: #222;
+      display: block;
+      margin-top: 12px;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      margin-top: 6px;
+      font-size: 14px;
+      outline: none;
+    }
+
+    button {
+      width: 100%;
+      margin-top: 18px;
+      background: #0073e6;
+      color: #fff;
+      font-size: 15px;
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #005bb5;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      color: #666;
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+  <!-- 🔹 Fixed Top Buttons -->
+  <div class="topbar">
+
+    <a href="/records"><i class="fas fa-upload"></i> <span>Upload Record</span></a>
+    <a href="/dashboard"><i class="fas fa-home"></i> <span>Dashboard</span></a>
+    <a href="/logout"><i class="fas fa-sign-out-alt"></i> <span>Logout</span></a>
+  </div>
+
+  <!-- 🔹 Main Form Card -->
+  <div class="card">
+    <h2><i class="fas fa-notes-medical"></i> Add / Upload Medical Record</h2>
+    <form action="/records/add" method="POST" enctype="multipart/form-data">
+      <label>Patient Name</label>
+      <input type="text" name="patientName" placeholder="Enter patient full name" required>
+
+      <label>Age</label>
+      <input type="number" name="age" placeholder="Enter age">
+
+      <label>Gender</label>
+      <select name="gender" required>
+        <option value="">Select gender</option>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+      </select>
+
+      <label>Diagnosis</label>
+      <textarea name="diagnosis" placeholder="Enter diagnosis details"></textarea>
+
+      <label>Treatment</label>
+      <textarea name="treatment" placeholder="Enter treatment details"></textarea>
+
+      <label>Doctor</label>
+      <input type="text" name="doctor" placeholder="Enter doctor name">
+
+      <label>Upload File</label>
+      <input type="file" name="file">
+
+      <button type="submit">Submit Record</button>
+    </form>
+  </div>
+
+</body>
+</html>

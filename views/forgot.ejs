@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Forgot Password | E-Health Record System</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #0077b6, #00b4d8);
+      display: flex; justify-content: center; align-items: center;
+      height: 100vh; margin: 0;
+    }
+    .auth-container {
+      background: #fff; padding: 30px 40px; border-radius: 15px;
+      box-shadow: 0 4px 25px rgba(0,0,0,0.2); text-align: center;
+      width: 400px;
+    }
+    h2 { color: #0077b6; }
+    p { color: #555; margin-bottom: 20px; }
+    .input-with-icon { position: relative; }
+    .input-with-icon i {
+      position: absolute; top: 50%; left: 12px;
+      transform: translateY(-50%); color: #888;
+    }
+    .form-control {
+      width: 100%; padding: 10px 10px 10px 35px;
+      border: 1px solid #ccc; border-radius: 8px; margin-bottom: 15px;
+    }
+    .btn {
+      width: 100%; padding: 10px; border: none;
+      background: #0077b6; color: white; border-radius: 8px; font-size: 16px;
+    }
+    .alert.error { background: #ffe5e5; color: #d90429; padding: 10px; border-radius: 8px; }
+    .alert.success { background: #e5ffe5; color: #007f5f; padding: 10px; border-radius: 8px; }
+  </style>
+</head>
+<body>
+  <div class="auth-container">
+    <i class="fas fa-key fa-2x"></i>
+    <h2>Forgot Password?</h2>
+    <p>Enter your registered email to reset your password</p>
+
+    <% if (typeof error !== 'undefined' && error) { %>
+      <div class="alert error"><i class="fas fa-exclamation-circle"></i> <%= error %></div>
+    <% } %>
+    <% if (typeof message !== 'undefined' && message) { %>
+      <div class="alert success"><i class="fas fa-check-circle"></i> <%= message %></div>
+    <% } %>
+
+    <form method="post" action="/forgot">
+      <div class="input-with-icon">
+        <i class="fas fa-envelope"></i>
+        <input name="email" type="email" placeholder="Email address" required class="form-control">
+      </div>
+      <button type="submit" class="btn"><i class="fas fa-paper-plane"></i> Send Reset Link</button>
+    </form>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+
+import {
+  getAuth,
+  sendPasswordResetEmail
+} from "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCX7ZpjvZdl1k2A4Vw2dsPwUs9PNXcvU-w",
+  authDomain: "e-health-record-e391d.firebaseapp.com",
+  projectId: "e-health-record-e391d"
+};
+
+const app "AIzaSyCX7ZpjvZdl1k2A4Vw2dsPwUs9PNXcvU-w"= initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+document.querySelector("form").addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const email = document.querySelector('input[name="email"]').value;
+
+  try {
+    await sendPasswordResetEmail(auth, email);
+
+    alert("Password reset email sent successfully!");
+  } catch (error) {
+    alert(error.message);
+  }
+});
+</script>
+
+    <p style="margin-top:15px;"><a href="/login" class="auth-link">Back to login</a></p>
+  </div>
+</body>
+</html>

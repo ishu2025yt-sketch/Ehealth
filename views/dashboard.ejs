@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard | E-Health Record</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f4f7fc;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Header Section */
+    header {
+      background: #0066cc;
+      color: white;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    header h1 {
+      font-size: 20px;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    header h1 i {
+      font-size: 22px;
+    }
+
+    header .btn {
+      background: white;
+      color: #0066cc;
+      padding: 8px 18px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: 0.3s;
+    }
+    header .btn:hover {
+      background: #e6f0ff;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 30px auto;
+      padding: 15px;
+    }
+
+    /* Dashboard Section (Top Blue Bar) */
+    .dashboard-bar {
+      background: #007bff;
+      color: #fff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 18px;
+      border-radius: 10px;
+      margin-bottom: 25px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .dashboard-bar h2 {
+      margin: 0;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .dashboard-bar a {
+      color: #fff;
+      background: #004fa3;
+      padding: 8px 16px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: 0.3s;
+    }
+    .dashboard-bar a:hover {
+      background: #003f87;
+    }
+
+    h3 {
+      color: #0066cc;
+      margin-bottom: 15px;
+      font-size: 20px;
+    }
+
+    .btn-add {
+      display: inline-block;
+      background: #0066cc;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: 0.3s;
+      margin-bottom: 20px;
+    }
+    .btn-add:hover {
+      background: #004fa3;
+    }
+
+    /* Record Cards */
+    .card {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      padding: 20px;
+      margin-bottom: 20px;
+      transition: 0.3s;
+    }
+    .card:hover {
+      transform: translateY(-3px);
+    }
+
+    .record-title {
+      font-size: 18px;
+      color: #333;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .record-meta {
+      color: #555;
+      font-size: 14px;
+      margin-bottom: 10px;
+      word-break: break-word;
+    }
+
+    .pdf-link {
+      background: #28a745;
+      padding: 6px 12px;
+      border-radius: 5px;
+      color: white;
+      text-decoration: none;
+      font-size: 13px;
+      transition: 0.3s;
+      margin-right: 10px;
+    }
+    .pdf-link:hover {
+      background: #218838;
+    }
+
+    @media (max-width: 700px) {
+      header, .dashboard-bar {
+        flex-direction: column;
+        text-align: center;
+      }
+      .dashboard-bar h2 {
+        font-size: 17px;
+      }
+      .dashboard-bar a {
+        width: 100%;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <h1><i class="fas fa-heartbeat"></i> E-Health Dashboard</h1>
+    <a href="/logout" class="btn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+  </header>
+
+  <!-- Dashboard Top Bar -->
+  <div class="container">
+    <div class="dashboard-bar">
+      <h2><i class="fas fa-clipboard-list"></i> Your Medical Records</h2>
+      <a href="/records"><i class="fas fa-plus-circle"></i> Add New Record</a>
+    </div>
+
+    <% if(records.length === 0){ %>
+      <p style="color:#777;">No records yet.</p>
+    <% } else { %>
+      <% records.forEach(r => { %>
+        <div class="card">
+          <div class="record-title">
+            <i class="fas fa-user"></i> <%= r.patientName %>
+          </div>
+          <div class="record-meta">
+            Doctor: <%= r.doctor || '-' %> •
+            Date: <%= new Date(r.createdAt).toLocaleString() %>
+          </div>
+          <a href="/records/<%= r.id %>" class="pdf-link"><i class="fas fa-eye"></i> View Record</a>
+          <a href="/records/<%= r.id %>/pdf" target="_blank" class="pdf-link"><i class="fas fa-file-pdf"></i> PDF</a>
+        </div>
+      <% }) %>
+    <% } %>
+  </div>
+</body>
+</html>

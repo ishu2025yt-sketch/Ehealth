@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>E-Health (mobile demo)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 min-h-screen">
+  <div class="max-w-3xl mx-auto p-4">
+    <header class="flex justify-between items-center mb-4">
+      <h1 class="text-xl font-bold">E-Health Demo</h1>
+      <div id="authArea"></div>
+    </header>
+
+    <div id="alert" class="hidden mb-4"></div>
+
+    <!-- Login pane -->
+    <div id="loginPane" class="bg-white p-4 rounded shadow">
+      <h2 class="font-semibold mb-2">Login / Register</h2>
+      <input id="email" class="w-full border p-2 rounded mb-2" placeholder="Email"/>
+      <input id="password" type="password" class="w-full border p-2 rounded mb-2" placeholder="Password"/>
+      <div class="flex gap-2">
+        <button id="loginBtn" class="px-3 py-2 bg-blue-600 text-white rounded">Login</button>
+        <button id="registerBtn" class="px-3 py-2 border rounded">Register</button>
+        <button id="seedBtn" class="px-3 py-2 border rounded">Seed Admin</button>
+      </div>
+    </div>
+
+    <!-- Dashboard -->
+    <div id="dashboard" class="hidden mt-4">
+      <div class="bg-white p-3 rounded shadow mb-3 flex justify-between items-center">
+        <div>
+          <div id="welcome" class="font-semibold"></div>
+          <div id="role" class="text-sm text-gray-600"></div>
+        </div>
+        <div class="flex gap-2">
+          <button id="logoutBtn" class="px-3 py-1 border rounded hidden">Logout</button>
+          <button id="newPatientBtn" class="px-3 py-1 bg-green-600 text-white rounded">+ Patient</button>
+          <button id="appointmentsBtn" class="px-3 py-1 border rounded">Appointments</button>
+          <button id="exportBtn" class="px-3 py-1 border rounded">Export JSON</button>
+        </div>
+      </div>
+
+      <div class="bg-white p-3 rounded shadow mb-3">
+        <div class="flex justify-between items-center mb-3">
+          <input id="searchQ" class="border p-2 rounded w-2/3" placeholder="Search patient..."/>
+          <button id="refreshBtn" class="px-3 py-1 border rounded">Refresh</button>
+        </div>
+        <div id="patientsList" class="space-y-2"></div>
+      </div>
+
+      <div id="modalRoot"></div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login | E-Health Record System</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #00b4d8, #0077b6);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0;
+    }
+    .auth-container {
+      background: #fff;
+      border-radius: 15px;
+      box-shadow: 0 4px 25px rgba(0,0,0,0.2);
+      width: 400px;
+      padding: 30px 40px;
+      text-align: center;
+      animation: fadeIn 0.5s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(20px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+    .auth-header h2 {
+      margin: 10px 0 5px;
+      color: #0077b6;
+    }
+    .auth-header p {
+      color: #555;
+      margin-bottom: 20px;
+    }
+    .form-group {
+      margin-bottom: 15px;
+      text-align: left;
+    }
+    .input-with-icon {
+      position: relative;
+    }
+    .input-with-icon i {
+      position: absolute;
+      top: 50%;
+      left: 12px;
+      transform: translateY(-50%);
+      color: #888;
+    }
+    .form-control {
+      width: 100%;
+      padding: 10px 10px 10px 35px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 14px;
+      transition: border 0.3s;
+    }
+    .form-control:focus {
+      border-color: #0077b6;
+      outline: none;
+    }
+    .btn {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      background: #0077b6;
+      color: white;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .btn:hover {
+      background: #023e8a;
+    }
+    .auth-footer {
+      margin-top: 20px;
+      font-size: 14px;
+    }
+    .auth-link {
+      color: #0077b6;
+      text-decoration: none;
+    }
+    .auth-link:hover {
+      text-decoration: underline;
+    }
+    .alert {
+      margin-bottom: 15px;
+      padding: 10px;
+      border-radius: 8px;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .alert i {
+      margin-right: 8px;
+    }
+    .alert.error {
+      background: #ffe5e5;
+      color: #d90429;
+    }
+    .alert.success {
+      background: #e5ffe5;
+      color: #007f5f;
+    }
+  </style>
+</head>
+<body>
+  <div class="auth-container">
+    <div class="auth-header">
+      <i class="fas fa-sign-in-alt fa-2x"></i>
+      <h2>Welcome Back</h2>
+      <p>Please sign in to your account</p>
+    </div>
+
+    <% if (typeof error !== 'undefined' && error) { %>
+      <div class="alert error">
+        <i class="fas fa-exclamation-circle"></i> <%= error %>
+      </div>
+    <% } %>
+
+    <% if (typeof message !== 'undefined' && message) { %>
+      <div class="alert success">
+        <i class="fas fa-check-circle"></i> <%= message %>
+      </div>
+    <% } %>
+
+    <form method="post" action="/login">
+      <div class="form-group">
+        <div class="input-with-icon">
+          <i class="fas fa-envelope"></i>
+          <input name="email" type="email" placeholder="Email address" required class="form-control">
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="input-with-icon">
+          <i class="fas fa-lock"></i>
+          <input name="password" type="password" placeholder="Password" required class="form-control">
+        </div>
+      </div>
+
+      <% if (typeof next !== 'undefined') { %>
+        <input type="hidden" name="next" value="<%= next %>">
+      <% } else { %>
+        <input type="hidden" name="next" value="">
+      <% } %>
+
+      <button type="submit" class="btn">
+        <i class="fas fa-sign-in-alt"></i> Sign In
+      </button>
+    </form>
+
+    <div class="auth-footer">
+      <a href="/forgot" class="auth-link"><i class="fas fa-key"></i> Forgot your password?</a><br>
+      <p>Don't have an account? <a href="/register" class="auth-link">Create one here</a></p>
+    </div>
+  </div>
+</body>
+</html>
